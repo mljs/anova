@@ -1,6 +1,6 @@
 {
   "name": "ml-anova",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Analysis of variance",
   "main": "./lib/index.js",
   "module": "./lib-esm/index.js",
