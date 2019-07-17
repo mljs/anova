@@ -32,6 +32,10 @@ const result = oneWay(data, classes, { alpha: 0.05 }); // 0.05 is the default va
 */
 ```
 
+### Two-way ANOVA
+
+Under development...
+
 ## License
 
 [MIT](./LICENSE)
