@@ -1,4 +1,10 @@
+import { getNumbers, getClasses } from 'ml-dataset-iris';
+import { Matrix } from 'ml-matrix';
+
 import { oneWay } from '..';
+
+const irisData = new Matrix(getNumbers());
+const irisClasses = getClasses();
 
 test('throws with bad arguments', () => {
   // @ts-ignore
@@ -22,4 +28,12 @@ test('Wikipedia example', () => {
   expect(result.pValue).toBeCloseTo(0.002399, 6);
   expect(result.testValue).toBeCloseTo(9.3, 1);
   expect(result.freedom).toStrictEqual([2, 15]);
+});
+
+test('iris dataset compared with R', () => {
+  const result = oneWay(irisData.getColumn(0), irisClasses);
+  expect(result.rejected).toBe(true);
+  expect(result.freedom).toStrictEqual([2, 147]);
+  expect(result.testValue).toBeCloseTo(119.3, 1);
+  expect(result.pValue).toBeLessThan(2e-16);
 });
