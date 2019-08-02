@@ -1,6 +1,4 @@
-// @ts-ignore
 import arrayMean from 'ml-array-mean';
-// @ts-ignore
 import * as cephes from 'cephes';
 
 export interface IOneWayOptions {
@@ -74,8 +72,7 @@ export function oneWay(
 
   let withinGroup = centered.reduce(
     (total, groupCentered) =>
-      total +
-      groupCentered.reduce((total2, centered) => total2 + centered ** 2, 0),
+      total + groupCentered.reduce((total2, c) => total2 + c ** 2, 0),
     0,
   );
   withinGroup /= d2;
