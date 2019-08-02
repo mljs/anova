@@ -34,7 +34,39 @@ const result = oneWay(data, classes, { alpha: 0.05 }); // 0.05 is the default va
 
 ### Two-way ANOVA
 
-Under development...
+Unbalanced designs are not supported yet.
+
+```js
+import { twoWay } from 'ml-anova';
+
+const data = [1, 2, 1, 3, 4, 5, 9, 10, 11];
+const classesA = ['A', 'A', 'A', 'B', 'B', 'B', 'C', 'C', 'C'];
+const classesB = ['X', 'X', 'X', 'X', 'X', 'X', 'Y', 'Y', 'Y'];
+
+const result = twoWay(data, classesA, classesB, { alpha: 0.05 });
+/*
+{
+  classA: {
+    rejected: true,
+    testValue: 304,
+    pValue: 5.256992280576244e-11,
+    freedom: [ 2, 12 ]
+  },
+  classB: {
+    rejected: true,
+    testValue: 691.4285714285716,
+    pValue: 5.601171179813454e-12,
+    freedom: [ 1, 12 ]
+  },
+  interaction: {
+    rejected: true,
+    testValue: 138.28571428571433,
+    pValue: 5.170916200594281e-9,
+    freedom: [ 2, 12 ]
+  }
+}
+*/
+```
 
 ## License
 

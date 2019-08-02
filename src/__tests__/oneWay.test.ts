@@ -19,6 +19,10 @@ test('throws with bad arguments', () => {
   expect(() => oneWay([0, 1], [1, 1])).toThrow(
     /there must be at least two different classes/,
   );
+  // @ts-ignore
+  expect(() => oneWay([0, 1], [1, 2], { alpha: 'str' })).toThrow(
+    /alpha must be a number/,
+  );
 });
 
 test('Wikipedia example', () => {

@@ -1,15 +1,9 @@
 import arrayMean from 'ml-array-mean';
-import * as cephes from 'cephes';
+
+import { getClassToIndexMap, IOneWayResult, getAnovaResult } from './utils';
 
 export interface IOneWayOptions {
   alpha?: number;
-}
-
-export interface IOneWayResult {
-  rejected: boolean;
-  testValue: number;
-  pValue: number;
-  freedom: [number, number];
 }
 
 export function oneWay(
@@ -29,6 +23,10 @@ export function oneWay(
 
   const { alpha = 0.05 } = options;
 
+  if (typeof alpha !== 'number') {
+    throw new TypeError('alpha must be a number');
+  }
+
   const allClasses = new Set(classes);
   const numClasses = allClasses.size;
 
@@ -36,13 +34,7 @@ export function oneWay(
     throw new RangeError('there must be at least two different classes');
   }
 
-  const classToIndex = new Map<unknown, number>();
-  {
-    let i = 0;
-    for (const klass of allClasses) {
-      classToIndex.set(klass, i++);
-    }
-  }
+  const classToIndex = getClassToIndexMap(allClasses);
 
   const d1 = numClasses - 1;
   const d2 = data.length - numClasses;
@@ -78,12 +70,5 @@ export function oneWay(
   withinGroup /= d2;
 
   const fValue = betweenGroups / withinGroup;
-  const pValue = cephes.fdtrc(d1, d2, fValue);
-
-  return {
-    rejected: pValue < alpha,
-    testValue: fValue,
-    pValue,
-    freedom: [d1, d2],
-  };
+  return getAnovaResult(d1, d2, fValue, alpha);
 }
