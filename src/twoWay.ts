@@ -4,6 +4,11 @@ import { getAnovaResult, IAnovaResult } from './utils';
 
 export interface ITwoWayOptions {
   alpha?: number;
+  /**
+   * Whether the model should be computed with interaction.
+   * @default `true`
+   */
+  interaction?: boolean;
 }
 
 export interface ITwoWayResult {
@@ -34,10 +39,14 @@ export function twoWay(
     throw new RangeError('data must have the same length as classesB');
   }
 
-  const { alpha = 0.05 } = options;
+  const { alpha = 0.05, interaction = true } = options;
 
   if (typeof alpha !== 'number') {
-    throw new TypeError('alpha must be a number');
+    throw new TypeError('options.alpha must be a number');
+  }
+
+  if (typeof interaction !== 'boolean') {
+    throw new TypeError('options.interaction must be a boolean');
   }
 
   const allClassesA = new Set(classesA);
@@ -105,16 +114,32 @@ export function twoWay(
 
   const totalMean = arrayMean(data);
 
+  const dfA = a - 1;
+  const dfB = b - 1;
+
   let ssWithin = 0;
-  for (const data1 of data3d.values()) {
-    for (const data2 of data1.values()) {
-      const mean = arrayMean(data2);
-      for (const value of data2) {
-        ssWithin += Math.pow(value - mean, 2);
+  if (interaction) {
+    for (const data1 of data3d.values()) {
+      for (const data2 of data1.values()) {
+        const mean = arrayMean(data2);
+        for (const value of data2) {
+          ssWithin += Math.pow(value - mean, 2);
+        }
+      }
+    }
+  } else {
+    for (const [key1, data1] of data3d) {
+      const meanA = arrayMean(dataA.get(key1) as number[]) - totalMean;
+      for (const [key2, data2] of data1) {
+        const meanB = arrayMean(dataB.get(key2) as number[]) - totalMean;
+        for (const value of data2) {
+          const val = value - (totalMean + meanA + meanB);
+          ssWithin += Math.pow(val, 2);
+        }
       }
     }
   }
-  const dfWithin = (r - 1) * a * b;
+  const dfWithin = interaction ? (r - 1) * a * b : data.length - dfA - dfB - 1;
   const msWithin = ssWithin / dfWithin;
 
   let ssA = 0;
@@ -123,7 +148,6 @@ export function twoWay(
     ssA += Math.pow(meanA - totalMean, 2);
   }
   ssA = r * b * ssA;
-  const dfA = a - 1;
   const msA = ssA / dfA;
 
   let ssB = 0;
@@ -132,7 +156,6 @@ export function twoWay(
     ssB += Math.pow(meanB - totalMean, 2);
   }
   ssB = r * a * ssB;
-  const dfB = b - 1;
   const msB = ssB / dfB;
 
   let ssInteraction = 0;

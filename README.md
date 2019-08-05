@@ -34,7 +34,7 @@ const result = oneWay(data, classes, { alpha: 0.05 }); // 0.05 is the default va
 
 ### Two-way ANOVA
 
-Unbalanced designs are not supported yet.
+**Note:** Unbalanced designs are not supported.
 
 ```js
 import { twoWay } from 'ml-anova';
