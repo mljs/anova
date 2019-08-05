@@ -2,27 +2,47 @@ import arrayMean from 'ml-array-mean';
 
 import { getAnovaResult, IAnovaResult } from './utils';
 
-export interface ITwoWayOptions {
+export interface ITwoWayWithInteractionOptions {
   alpha?: number;
-  /**
-   * Whether the model should be computed with interaction.
-   * @default `true`
-   */
-  interaction?: boolean;
+  interaction?: true;
 }
 
-export interface ITwoWayResult {
+export interface ITwoWayWithoutInteractionOptions {
+  alpha?: number;
+  interaction: false;
+}
+
+export interface ITwoWayWithInteractionResult {
   classA: IAnovaResult;
   classB: IAnovaResult;
   interaction: IAnovaResult;
+}
+
+export interface ITwoWayWithoutInteractionResult {
+  classA: IAnovaResult;
+  classB: IAnovaResult;
 }
 
 export function twoWay(
   data: number[],
   classesA: unknown[],
   classesB: unknown[],
-  options: ITwoWayOptions = {},
-): ITwoWayResult {
+  options?: ITwoWayWithInteractionOptions,
+): ITwoWayWithInteractionResult;
+export function twoWay(
+  data: number[],
+  classesA: unknown[],
+  classesB: unknown[],
+  options: ITwoWayWithoutInteractionOptions,
+): ITwoWayWithoutInteractionResult;
+export function twoWay(
+  data: number[],
+  classesA: unknown[],
+  classesB: unknown[],
+  options:
+    | ITwoWayWithInteractionOptions
+    | ITwoWayWithoutInteractionOptions = {},
+): ITwoWayWithInteractionResult | ITwoWayWithoutInteractionResult {
   if (!Array.isArray(data)) {
     throw new TypeError('data must be an array');
   }
@@ -149,6 +169,7 @@ export function twoWay(
   }
   ssA = r * b * ssA;
   const msA = ssA / dfA;
+  const fA = msA / msWithin;
 
   let ssB = 0;
   for (const datumB of dataB.values()) {
@@ -157,27 +178,31 @@ export function twoWay(
   }
   ssB = r * a * ssB;
   const msB = ssB / dfB;
-
-  let ssInteraction = 0;
-  for (const [keyA, data1] of data3d) {
-    const meanA = arrayMean(dataA.get(keyA) as number[]);
-    for (const [keyB, data2] of data1) {
-      const meanB = arrayMean(dataB.get(keyB) as number[]);
-      const interMean = arrayMean(data2);
-      ssInteraction += Math.pow(interMean - meanA - meanB + totalMean, 2);
-    }
-  }
-  ssInteraction = r * ssInteraction;
-  const dfInteraction = (a - 1) * (b - 1);
-  const msInteraction = ssInteraction / dfInteraction;
-
-  const fA = msA / msWithin;
   const fB = msB / msWithin;
-  const fInteraction = msInteraction / msWithin;
 
-  return {
-    classA: getAnovaResult(dfA, dfWithin, fA, alpha),
-    classB: getAnovaResult(dfB, dfWithin, fB, alpha),
-    interaction: getAnovaResult(dfInteraction, dfWithin, fInteraction, alpha),
-  };
+  if (interaction) {
+    let ssInteraction = 0;
+    for (const [keyA, data1] of data3d) {
+      const meanA = arrayMean(dataA.get(keyA) as number[]);
+      for (const [keyB, data2] of data1) {
+        const meanB = arrayMean(dataB.get(keyB) as number[]);
+        const interMean = arrayMean(data2);
+        ssInteraction += Math.pow(interMean - meanA - meanB + totalMean, 2);
+      }
+    }
+    ssInteraction = r * ssInteraction;
+    const dfInteraction = (a - 1) * (b - 1);
+    const msInteraction = ssInteraction / dfInteraction;
+    const fInteraction = msInteraction / msWithin;
+    return {
+      classA: getAnovaResult(dfA, dfWithin, fA, alpha),
+      classB: getAnovaResult(dfB, dfWithin, fB, alpha),
+      interaction: getAnovaResult(dfInteraction, dfWithin, fInteraction, alpha),
+    };
+  } else {
+    return {
+      classA: getAnovaResult(dfA, dfWithin, fA, alpha),
+      classB: getAnovaResult(dfB, dfWithin, fB, alpha),
+    };
+  }
 }
