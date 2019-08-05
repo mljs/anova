@@ -34,10 +34,10 @@ const result = oneWay(data, classes, { alpha: 0.05 }); // 0.05 is the default va
 
 ### Repeated measures ANOVA
 
-````js
+```js
 import {repeatedMeasures} from 'ml-anova';
 
-  const data = [45, 50, 55, 42, 42, 45, 36, 41, 43, 39, 35, 40, 51, 55, 59, 44, 49, 56];
+  const d = [45, 50, 55, 42, 42, 45, 36, 41, 43, 39, 35, 40, 51, 55, 59, 44, 49, 56];
   const patients = [1 ,1 ,1 ,2 ,2 ,2 ,3 ,3 ,3 ,4, 4, 4, 5,5 ,5 ,6 ,6 ,6 ];
   const time = [
     'pre','3month','6months','pre','3month','6months','pre','3month','6months','pre','3month','6months','pre','3month','6months','pre','3month','6months'
@@ -53,6 +53,7 @@ import {repeatedMeasures} from 'ml-anova';
     }
   */
 
+```
 
 ### Two-way ANOVA
 
