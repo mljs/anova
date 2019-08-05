@@ -1,6 +1,6 @@
 import * as cephes from 'cephes';
 
-export interface IOneWayResult {
+export interface IAnovaResult {
   rejected: boolean;
   testValue: number;
   pValue: number;
@@ -23,7 +23,7 @@ export function getAnovaResult(
   df2: number,
   fValue: number,
   alpha: number,
-): IOneWayResult {
+): IAnovaResult {
   const pValue = cephes.fdtrc(df1, df2, fValue);
 
   return {

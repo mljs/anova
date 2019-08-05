@@ -1,15 +1,15 @@
 import arrayMean from 'ml-array-mean';
 
-import { getAnovaResult, IOneWayResult } from './utils';
+import { getAnovaResult, IAnovaResult } from './utils';
 
 export interface ITwoWayOptions {
   alpha?: number;
 }
 
 export interface ITwoWayResult {
-  classA: IOneWayResult;
-  classB: IOneWayResult;
-  interaction: IOneWayResult;
+  classA: IAnovaResult;
+  classB: IAnovaResult;
+  interaction: IAnovaResult;
 }
 
 export function twoWay(

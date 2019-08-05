@@ -1,6 +1,6 @@
 import arrayMean from 'ml-array-mean';
 
-import { getClassToIndexMap, IOneWayResult, getAnovaResult } from './utils';
+import { getClassToIndexMap, IAnovaResult, getAnovaResult } from './utils';
 
 export interface IOneWayOptions {
   alpha?: number;
@@ -10,7 +10,7 @@ export function oneWay(
   data: number[],
   classes: unknown[],
   options: IOneWayOptions = {},
-): IOneWayResult {
+): IAnovaResult {
   if (!Array.isArray(data)) {
     throw new TypeError('data must be an array');
   }
