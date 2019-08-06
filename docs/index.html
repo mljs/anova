@@ -88,6 +88,57 @@
     freedom: [2, 15]
   }
 */</span></code></pre>
+				<h3 id="repeated-measures-anova">Repeated measures ANOVA</h3>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> {repeatedMeasures} <span class="hljs-keyword">from</span> <span class="hljs-string">'ml-anova'</span>;
+
+  <span class="hljs-keyword">const</span> d = [<span class="hljs-number">45</span>, <span class="hljs-number">50</span>, <span class="hljs-number">55</span>, <span class="hljs-number">42</span>, <span class="hljs-number">42</span>, <span class="hljs-number">45</span>, <span class="hljs-number">36</span>, <span class="hljs-number">41</span>, <span class="hljs-number">43</span>, <span class="hljs-number">39</span>, <span class="hljs-number">35</span>, <span class="hljs-number">40</span>, <span class="hljs-number">51</span>, <span class="hljs-number">55</span>, <span class="hljs-number">59</span>, <span class="hljs-number">44</span>, <span class="hljs-number">49</span>, <span class="hljs-number">56</span>];
+  <span class="hljs-keyword">const</span> patients = [<span class="hljs-number">1</span> ,<span class="hljs-number">1</span> ,<span class="hljs-number">1</span> ,<span class="hljs-number">2</span> ,<span class="hljs-number">2</span> ,<span class="hljs-number">2</span> ,<span class="hljs-number">3</span> ,<span class="hljs-number">3</span> ,<span class="hljs-number">3</span> ,<span class="hljs-number">4</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>,<span class="hljs-number">5</span> ,<span class="hljs-number">5</span> ,<span class="hljs-number">6</span> ,<span class="hljs-number">6</span> ,<span class="hljs-number">6</span> ];
+  <span class="hljs-keyword">const</span> time = [
+    <span class="hljs-string">'pre'</span>,<span class="hljs-string">'3month'</span>,<span class="hljs-string">'6months'</span>,<span class="hljs-string">'pre'</span>,<span class="hljs-string">'3month'</span>,<span class="hljs-string">'6months'</span>,<span class="hljs-string">'pre'</span>,<span class="hljs-string">'3month'</span>,<span class="hljs-string">'6months'</span>,<span class="hljs-string">'pre'</span>,<span class="hljs-string">'3month'</span>,<span class="hljs-string">'6months'</span>,<span class="hljs-string">'pre'</span>,<span class="hljs-string">'3month'</span>,<span class="hljs-string">'6months'</span>,<span class="hljs-string">'pre'</span>,<span class="hljs-string">'3month'</span>,<span class="hljs-string">'6months'</span>
+  ];
+
+  <span class="hljs-keyword">const</span> result = repeatedMeasures(data, time, patients, { <span class="hljs-attr">alpha</span>: <span class="hljs-number">0.05</span> });
+  <span class="hljs-comment">/*
+    {
+      rejected: true,
+      testValue: 12.53398058252424,
+      pValue: 0.0018855906470255546,
+      freedom: [ 2, 10 ]
+    }
+  */</span>
+</code></pre>
+				<h3 id="two-way-anova">Two-way ANOVA</h3>
+				<p><strong>Note:</strong> Unbalanced designs are not supported.</p>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { twoWay } <span class="hljs-keyword">from</span> <span class="hljs-string">'ml-anova'</span>;
+
+<span class="hljs-keyword">const</span> data = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>];
+<span class="hljs-keyword">const</span> classesA = [<span class="hljs-string">'A'</span>, <span class="hljs-string">'A'</span>, <span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>, <span class="hljs-string">'B'</span>, <span class="hljs-string">'B'</span>, <span class="hljs-string">'C'</span>, <span class="hljs-string">'C'</span>, <span class="hljs-string">'C'</span>];
+<span class="hljs-keyword">const</span> classesB = [<span class="hljs-string">'X'</span>, <span class="hljs-string">'X'</span>, <span class="hljs-string">'X'</span>, <span class="hljs-string">'X'</span>, <span class="hljs-string">'X'</span>, <span class="hljs-string">'X'</span>, <span class="hljs-string">'Y'</span>, <span class="hljs-string">'Y'</span>, <span class="hljs-string">'Y'</span>];
+
+<span class="hljs-keyword">const</span> result = twoWay(data, classesA, classesB, { <span class="hljs-attr">alpha</span>: <span class="hljs-number">0.05</span> });
+<span class="hljs-comment">/*
+{
+  classA: {
+    rejected: true,
+    testValue: 304,
+    pValue: 5.256992280576244e-11,
+    freedom: [ 2, 12 ]
+  },
+  classB: {
+    rejected: true,
+    testValue: 691.4285714285716,
+    pValue: 5.601171179813454e-12,
+    freedom: [ 1, 12 ]
+  },
+  interaction: {
+    rejected: true,
+    testValue: 138.28571428571433,
+    pValue: 5.170916200594281e-9,
+    freedom: [ 2, 12 ]
+  }
+}
+*/</span>
+<span class="hljs-string">`</span></code></pre>
 				<h2 id="license">License</h2>
 				<p><a href="./LICENSE">MIT</a></p>
 			</div>
@@ -109,6 +160,15 @@
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
 						<a href="modules/_oneway_.html">"one<wbr>Way"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_repeatedmeasures_.html">"repeated<wbr>Measures"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_twoway_.html">"two<wbr>Way"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_utils_.html">"utils"</a>
 					</li>
 				</ul>
 			</nav>
