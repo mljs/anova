@@ -1,15 +1,11 @@
 {
   "compilerOptions": {
-    "declaration": true,
     "esModuleInterop": true,
-    "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "./lib",
     "sourceMap": true,
     "strict": true,
     "target": "esnext",
     "resolveJsonModule": true
   },
-  "include": ["./src/**/*"],
-  "exclude": ["./src/**/__tests__"]
+  "include": ["./src/**/*"]
 }
