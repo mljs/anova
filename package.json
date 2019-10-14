@@ -22,7 +22,7 @@
     "test-coverage": "npm run test-only -- --coverage",
     "test-only": "jest",
     "tsc": "npm run clean && npm run tsc-cjs && npm run tsc-esm",
-    "tsc-cjs": "tsc",
+    "tsc-cjs": "tsc --project tsconfig.cjs.json",
     "tsc-esm": "tsc --project tsconfig.esm.json"
   },
   "repository": {
