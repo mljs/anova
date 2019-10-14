@@ -1,3 +1,12 @@
+## [1.1.3](https://github.com/mljs/anova/compare/v1.1.2...v1.1.3) (2019-10-14)
+
+
+### Bug Fixes
+
+* correct tsc-cjs script ([255834c](https://github.com/mljs/anova/commit/255834c12ed08d938acf1c9eb25f3bfcceee09b3))
+
+
+
 ## [1.1.2](https://github.com/mljs/anova/compare/v1.1.1...v1.1.2) (2019-10-14)
 
 
