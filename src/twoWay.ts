@@ -124,10 +124,6 @@ export function twoWay(
       datumB.push(...data2);
       if (r === -1) {
         r = data2.length;
-      } else if (r !== data2.length) {
-        throw new RangeError(
-          `only balanced designs are supported. Expected ${r} values for class1=${key1}, class2=${key2}`,
-        );
       }
     }
   }

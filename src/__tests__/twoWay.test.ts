@@ -30,12 +30,6 @@ test('throws with bad arguments', () => {
   expect(() => twoWay([0, 1], [1, 2], [1, 2], { interaction: 'str' })).toThrow(
     /options\.interaction must be a boolean/,
   );
-  // @ts-ignore
-  expect(() =>
-    twoWay([0, 1, 2, 3, 4], [0, 0, 1, 1, 1], [1, 2, 3, 5, 5]),
-  ).toThrow(
-    /only balanced designs are supported. Expected 1 values for class1=1, class2=5/,
-  );
 });
 
 test('tooth growth dataset compared with R - with interaction', () => {
