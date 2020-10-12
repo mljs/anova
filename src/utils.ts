@@ -7,6 +7,9 @@ export interface IAnovaResult {
   freedom: [number, number];
 }
 
+/**
+ * @private
+ */
 export function getClassToIndexMap(
   classes: Set<unknown>,
 ): Map<unknown, number> {
@@ -18,6 +21,9 @@ export function getClassToIndexMap(
   return classToIndex;
 }
 
+/**
+ * @private
+ */
 export function getAnovaResult(
   df1: number,
   df2: number,
@@ -34,6 +40,9 @@ export function getAnovaResult(
   };
 }
 
+/**
+ * @private
+ */
 export function calcWithinGroup(allData: number[][], means: number[]): number {
   const centered = allData.map((groupData, i) =>
     groupData.map((datum) => datum - means[i]),
@@ -47,6 +56,9 @@ export function calcWithinGroup(allData: number[][], means: number[]): number {
   return withinGroup;
 }
 
+/**
+ * @private
+ */
 export function calcBetweenGroups(
   allData: number[][],
   means: number[],
@@ -59,6 +71,9 @@ export function calcBetweenGroups(
   return betweenGroups;
 }
 
+/**
+ * @private
+ */
 export function getDataByClass(
   data: number[],
   classes: unknown[],
