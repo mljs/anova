@@ -1,3 +1,5 @@
+### [1.1.4](https://github.com/mljs/anova/compare/v1.1.3...v1.1.4) (2020-10-12)
+
 ## [1.1.3](https://github.com/mljs/anova/compare/v1.1.2...v1.1.3) (2019-10-14)
 
 
