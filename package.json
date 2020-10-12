@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "clean": "rimraf lib lib-esm",
-    "eslint": "eslint src --ext ts --cache",
+    "eslint": "eslint src --ext ts",
     "eslint-fix": "npm run eslint -- --fix",
     "prepublishOnly": "npm run tsc",
     "test": "npm run test-coverage && npm run eslint",
@@ -45,25 +45,19 @@
     "trailingComma": "all"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.18",
-    "@typescript-eslint/eslint-plugin": "^2.3.3",
-    "@typescript-eslint/parser": "^2.3.3",
-    "eslint": "^6.5.1",
-    "eslint-config-cheminfo": "^2.0.3",
-    "eslint-config-cheminfo-typescript": "^4.1.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^22.19.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "jest": "^24.9.0",
+    "@types/jest": "^26.0.14",
+    "eslint": "^7.11.0",
+    "eslint-config-cheminfo-typescript": "^8.0.3",
+    "jest": "^26.5.3",
     "ml-dataset-iris": "^1.1.1",
-    "ml-matrix": "^6.4.1",
-    "prettier": "^1.18.2",
-    "rimraf": "^3.0.0",
-    "ts-jest": "^24.1.0",
-    "typescript": "^3.6.4"
+    "ml-matrix": "^6.5.3",
+    "prettier": "^2.1.2",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.4.1",
+    "typescript": "^4.0.3"
   },
   "dependencies": {
     "cephes": "^1.2.0",
-    "ml-array-mean": "^1.1.2"
+    "ml-array-mean": "^1.1.4"
   }
 }

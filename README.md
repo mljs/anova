@@ -1,7 +1,7 @@
 # anova
 
 [![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
+[![build status][ci-image]][ci-url]
 [![Test coverage][codecov-image]][codecov-url]
 [![npm download][download-image]][download-url]
 
@@ -92,11 +92,11 @@ const result = twoWay(data, classesA, classesB, { alpha: 0.05 });
 
 [MIT](./LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/ml-anova.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/ml-anova.svg
 [npm-url]: https://www.npmjs.com/package/ml-anova
-[travis-image]: https://img.shields.io/travis/com/mljs/anova/master.svg?style=flat-square
-[travis-url]: https://travis-ci.com/mljs/anova
-[codecov-image]: https://img.shields.io/codecov/c/github/mljs/anova.svg?style=flat-square
+[ci-image]: https://github.com/mljs/anova/workflows/Node.js%20CI/badge.svg?branch=master
+[ci-url]: https://github.com/mljs/anova/actions?query=workflow%3A%22Node.js+CI%22
+[codecov-image]: https://img.shields.io/codecov/c/github/mljs/anova.svg
 [codecov-url]: https://codecov.io/gh/mljs/anova
-[download-image]: https://img.shields.io/npm/dm/ml-anova.svg?style=flat-square
+[download-image]: https://img.shields.io/npm/dm/ml-anova.svg
 [download-url]: https://www.npmjs.com/package/ml-anova

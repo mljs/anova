@@ -1,6 +1,6 @@
-import toothGrowth from './ToothGrowth.json';
-
 import { twoWay } from '..';
+
+import toothGrowth from './ToothGrowth.json';
 
 test('throws with bad arguments', () => {
   // @ts-ignore

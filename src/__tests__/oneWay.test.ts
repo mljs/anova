@@ -1,9 +1,9 @@
 import { getNumbers, getClasses } from 'ml-dataset-iris';
 import { Matrix } from 'ml-matrix';
 
-import ToothGrowth from './ToothGrowth.json';
-
 import { oneWay } from '..';
+
+import ToothGrowth from './ToothGrowth.json';
 
 const irisData = new Matrix(getNumbers());
 const irisClasses = getClasses();
