@@ -1,3 +1,10 @@
+### [1.1.5](https://github.com/mljs/anova/compare/v1.1.4...v1.1.5) (2020-10-12)
+
+
+### Bug Fixes
+
+* **types:** mark internal functions as private ([67d2aca](https://github.com/mljs/anova/commit/67d2aca8c097967a94526ceb46ae626b994f4094))
+
 ### [1.1.4](https://github.com/mljs/anova/compare/v1.1.3...v1.1.4) (2020-10-12)
 
 ## [1.1.3](https://github.com/mljs/anova/compare/v1.1.2...v1.1.3) (2019-10-14)
